@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: #f5f8f0;
+  color: #25453c;
+  font-family: Arial, sans-serif;
+}
+
+.contenedor {
+  width: min(90%, 650px);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 8px;
+}
+
+p {
+  margin: 0 0 25px;
+}
+
+.paisaje {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(#7bc8ee, #d8f3fa);
+  box-shadow: 0 14px 35px #25453c25;
+}
+
+.sol {
+  position: absolute;
+  top: 62px;
+  right: 105px;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: #ffd15c;
+  box-shadow: 0 0 0 14px #ffe69580, 0 0 45px #ffe695;
+  animation: flotar 3s ease-in-out infinite alternate;
+}
+
+.nube {
+  position: absolute;
+  top: 105px;
+  left: 12%;
+  width: 120px;
+  height: 40px;
+  border-radius: 40px;
+  background: white;
+  filter: drop-shadow(0 6px 5px #467b9226);
+  animation: pasear 5s ease-in-out infinite alternate;
+}
+
+.nube::before,
+.nube::after {
+  content: "";
+  position: absolute;
+  bottom: 16px;
+  border-radius: 50%;
+  background: white;
+}
+
+.nube::before {
+  left: 22px;
+  width: 55px;
+  height: 55px;
+}
+
+.nube::after {
+  right: 20px;
+  width: 45px;
+  height: 45px;
+}
+
+.colina {
+  position: absolute;
+  bottom: -95px;
+  width: 110%;
+  height: 210px;
+  border-radius: 50% 50% 0 0;
+}
+
+.colina-fondo {
+  left: -35%;
+  background: #a7d995;
+}
+
+.colina-frente {
+  right: -30%;
+  bottom: -115px;
+  background: #68b97e;
+}
+
+@keyframes flotar {
+  from { transform: translateY(0); }
+  to { transform: translateY(-25px); }
+}
+
+@keyframes pasear {
+  from { transform: translateX(0); }
+  to { transform: translateX(65px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sol, .nube { animation: none; }
+}

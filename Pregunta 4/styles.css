@@ -1,0 +1,135 @@
+/* Pregunta 4: base compatible primero; las mejoras modernas se aplican después. */
+* { box-sizing: border-box; }
+
+html { font-family: Arial, Helvetica, sans-serif; }
+
+body {
+  margin: 0;
+  color: #f6f7ff;
+  /* Fallback 1: color plano si el navegador no entiende gradientes. */
+  background: #111b36;
+  background: linear-gradient(130deg, #111b36 4%, #202b59 54%, #2b2254 100%);
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  min-height: 100vh;
+  padding: 5rem 1.5rem;
+  overflow: hidden;
+}
+
+.page__glow {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.page__glow--one {
+  width: 380px;
+  height: 380px;
+  top: -135px;
+  right: -85px;
+  background: #b785f5;
+  background: radial-gradient(circle, #b785f5, #7960c8);
+}
+
+.page__glow--two {
+  width: 290px;
+  height: 290px;
+  bottom: -135px;
+  left: 28%;
+  background: #55bbcc;
+  background: radial-gradient(circle, #55bbcc, #286c9b);
+}
+
+.intro, .profile { position: relative; z-index: 1; }
+.intro { width: 100%; max-width: 470px; }
+.eyebrow, .profile__label { color: #a7f4e4; font-size: .73rem; font-weight: 700; letter-spacing: .2em; }
+.eyebrow { margin: 0 0 1.7rem; }
+
+h1 {
+  margin: 0;
+  line-height: 1.04;
+  letter-spacing: -.055em;
+  /* Fallback 2: tamaño legible sin soporte para clamp(). */
+  font-size: 3.5rem;
+  font-size: clamp(3rem, 6vw, 5.7rem);
+}
+
+h1 span { color: #a7f4e4; }
+.intro__text { max-width: 390px; margin: 1.7rem 0 2.5rem; color: #d4dbee; font-size: 1.05rem; line-height: 1.75; }
+.intro__note { display: flex; align-items: center; gap: .7rem; color: #c7d0e5; font-size: .83rem; }
+.intro__note-mark { display: inline-block; width: 25px; height: 1px; background: #a7f4e4; }
+
+.profile {
+  width: 100%;
+  max-width: 410px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 25px;
+  /* Base opaca: el texto conserva contraste cuando no existe desenfoque. */
+  background: #263453;
+  box-shadow: 0 28px 70px rgba(5, 11, 32, .32);
+}
+
+/* Solo se vuelve translúcida si alguno de los filtros está disponible.
+   Prefijo de proveedor primero; propiedad estándar siempre al final. */
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .profile {
+    background: rgba(37, 49, 81, .78);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+}
+
+.profile__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.avatar { display: flex; justify-content: center; align-items: center; width: 70px; height: 70px; border-radius: 19px; color: #182648; background: #b4eee2; font-size: 1.35rem; font-weight: 800; letter-spacing: -.05em; }
+.availability { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .7rem; border: 1px solid rgba(167, 244, 228, .45); border-radius: 30px; color: #c5f7e8; font-size: .69rem; }
+.availability__dot { width: 7px; height: 7px; border-radius: 50%; background: #a7f4e4; }
+.profile__body { margin: 2.5rem 0 2rem; }
+.profile__label { margin: 0 0 .7rem; }
+.profile h2 { margin: 0; font-size: 2rem; letter-spacing: -.04em; }
+.profile__period { color: #a7f4e4; }
+.profile__role { margin: .5rem 0 1.25rem; color: #a7f4e4; font-size: .9rem; }
+.profile__description { margin: 0; color: #e0e6f3; font-size: .94rem; line-height: 1.65; }
+.profile__details { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 0 0 1.8rem; padding: 1.3rem 0 0; border-top: 1px solid rgba(255, 255, 255, .22); list-style: none; }
+.profile__details li { flex: 1 1 110px; }
+.profile__details span, .profile__details strong { display: block; }
+.profile__details span { margin-bottom: .4rem; color: #c6d2e8; font-size: .75rem; }
+.profile__details strong { font-size: .9rem; }
+
+.contact { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border-radius: 12px; background: #b4eee2; color: #162542; font-size: .9rem; font-weight: 700; text-decoration: none; transition: background-color .2s ease, transform .2s ease; }
+.contact span { font-size: 1.25rem; line-height: 1; }
+.contact:hover { background: #d2fff0; transform: translateY(-3px); }
+.contact:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+/* Alternativa de foco para navegadores anteriores a :focus-visible. */
+.contact:focus { outline: 3px solid #fff; outline-offset: 4px; }
+
+@media (max-width: 680px) {
+  .page { gap: 3rem; padding: 4rem 1.25rem; }
+  .profile { padding: 1.5rem; }
+  .intro__text { margin-bottom: 1.5rem; }
+}
+
+/* Accesibilidad: sin desplazamientos animados para quien solicita menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  .contact { transition: none; }
+  .contact:hover { transform: none; }
+}
+
+/* Tabla de compatibilidad (resultados SIMULADOS, no pruebas ejecutadas):
+   Navegador       | Se ve igual                         | Qué cambia
+   Chrome 120      | Texto, enlace, estructura y foco    | Tarjeta translúcida con desenfoque.
+   Firefox 102     | Texto, enlace, estructura y foco    | Tarjeta opaca; sin desenfoque de fondo.
+
+   La base opaca evita pérdida de legibilidad cuando @supports no detecta filtros.
+   Fuente consultada: MDN, backdrop-filter (Baseline 2024):
+   https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
+   Los resultados son expectativas de compatibilidad; verificar en navegadores reales.
+*/
