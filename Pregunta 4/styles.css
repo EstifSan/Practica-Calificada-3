@@ -1,4 +1,4 @@
-/* Pregunta 4: base compatible primero; las mejoras modernas se aplican después. */
+
 * { box-sizing: border-box; }
 
 html { font-family: Arial, Helvetica, sans-serif; }
@@ -6,7 +6,7 @@ html { font-family: Arial, Helvetica, sans-serif; }
 body {
   margin: 0;
   color: #f6f7ff;
-  /* Fallback 1: color plano si el navegador no entiende gradientes. */
+  /* Fallback 1 */
   background: #111b36;
   background: linear-gradient(130deg, #111b36 4%, #202b59 54%, #2b2254 100%);
 }
@@ -57,7 +57,7 @@ h1 {
   margin: 0;
   line-height: 1.04;
   letter-spacing: -.055em;
-  /* Fallback 2: tamaño legible sin soporte para clamp(). */
+  /* Fallback 2 */
   font-size: 3.5rem;
   font-size: clamp(3rem, 6vw, 5.7rem);
 }
@@ -73,7 +73,7 @@ h1 span { color: #a7f4e4; }
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, .25);
   border-radius: 25px;
-  /* Base opaca: el texto conserva contraste cuando no existe desenfoque. */
+  /* Base opaca: el texto conserva contraste cuando no existe desenfoque */
   background: #263453;
   box-shadow: 0 28px 70px rgba(5, 11, 32, .32);
 }
@@ -108,7 +108,6 @@ h1 span { color: #a7f4e4; }
 .contact span { font-size: 1.25rem; line-height: 1; }
 .contact:hover { background: #d2fff0; transform: translateY(-3px); }
 .contact:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
-/* Alternativa de foco para navegadores anteriores a :focus-visible. */
 .contact:focus { outline: 3px solid #fff; outline-offset: 4px; }
 
 @media (max-width: 680px) {
